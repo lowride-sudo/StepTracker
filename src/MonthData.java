@@ -74,11 +74,11 @@ public class MonthData {
 
     //лучшая серия дней, где наибольшее количество шагов сделано подряд
 
-    public int getBestStreakSteps() {
+    public int getBestStreakSteps(StepTracker stepTracker) {
         int streakSeries = 0;
         int streakMax = 0;
         for (int i : daysStepsEachDay) {
-            if (i > StepTracker.getStepsCountDayGoal()) {
+            if (i > stepTracker.getStepsCountDayGoal()) {
                 streakSeries += 1;
                 if (streakSeries > streakMax) {
                     streakMax = streakSeries;

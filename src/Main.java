@@ -6,6 +6,7 @@ public class Main {
     public static void main(String[] args) {
         boolean continueProgram = true;
         Scanner scan = new Scanner(System.in);
+        StepTracker stepTracker = new StepTracker();
         while (continueProgram) {
             try {
                 int menuChoice;
@@ -13,17 +14,17 @@ public class Main {
                 menuChoice = scan.nextInt();
                 switch (menuChoice) {
                     case 1:
-                        StepTracker.enterStepForDay();
+                        stepTracker.enterStepForDay();
                         break;
                     case 2:
-                        StepTracker.printMonthStatistic();
+                        stepTracker.printMonthStatistic();
                         break;
                     case 3:
                         System.out.println("Укажите цель в количестве шагов");
-                        StepTracker.setStepsCountDayGoal();
+                        stepTracker.setStepsCountDayGoal();
                         break;
                     case 4:
-                        System.out.println("Установлена цель в: " + StepTracker.getStepsCountDayGoal() + " шагов");
+                        System.out.println("Установлена цель в: " + stepTracker.getStepsCountDayGoal() + " шагов");
                         break;
                     case 5:
                         continueProgram = false;
