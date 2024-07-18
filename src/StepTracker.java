@@ -4,7 +4,12 @@ import java.util.Scanner;
 
 // Содержит методы для работы трекера
 public class StepTracker {
+    Scanner scan = new Scanner(System.in);
 
+
+    public StepTracker() {
+
+    }
 
     //Ввести количество шагов за определенный день
 
@@ -13,16 +18,13 @@ public class StepTracker {
     //Добавить проверки, что клиент ввел не отрицательное число, что число не выходит за диапазон,
     //    что введен именно ожидаемый результат (если принимает только цифры, то цифры).
     //   Если клиент ошибся, то информируем его, и завершаем выполнение метода, возвращая клиента назад в меню.
-    static Map<Integer, MonthData> year = new HashMap<>(); // Создаем мапу и заполняем ее месяцами
+    private Map<Integer, MonthData> year = new HashMap<>(); // Создаем мапу и заполняем ее месяцами
 
-    public static void enterStepForDay() {
-        int month;
-        int date;
-        int stepsCount;
-        Scanner scan = new Scanner(System.in);
+    public void enterStepForDay() {
+
         System.out.println("Введите номер месяца:");
 
-        month = readInt(scan);
+        int month = readInt(scan);
         while (month < 1 || month > 12) {
             System.out.println("Введен неверный месяц, повторите ввод");
             month = readInt(scan);
@@ -30,13 +32,13 @@ public class StepTracker {
 
         System.out.println("Введите число месяца от 1 до 30:"); // Проверка на диапазон дней находится в методе inputDaySteps
 
-        date = readInt(scan);
+        int date = readInt(scan);
         while (date < 1 || date > 30) {
             System.out.println("Введите число от 1 до 30");
             date = readInt(scan);}
 
         System.out.println("Введите число шагов:");
-        stepsCount = readInt(scan);
+        int stepsCount = readInt(scan);
         while (stepsCount < 1) {
             stepsCount = readInt(scan);
         }
@@ -60,10 +62,9 @@ public class StepTracker {
     // что число положительное, и является именно числом, если клиент ошибся, то завершаем метод,
     // и возвращаем клиента также в меню.
 
-    private static int stepsCountDayGoal = 0;
+    private int stepsCountDayGoal = 0;
 
-    public static void setStepsCountDayGoal() {
-        Scanner scan = new Scanner(System.in);
+    public void setStepsCountDayGoal() {
         try {
             int newGoal = readInt(scan);
             while (newGoal < 0) {
@@ -76,7 +77,7 @@ public class StepTracker {
 
     }
 
-    public static int getStepsCountDayGoal() {
+    public int getStepsCountDayGoal() {
         return stepsCountDayGoal;
     }
 
@@ -94,8 +95,7 @@ public class StepTracker {
     //    Количество сожженных килокалорий за месяц: ;
     //    Лучшая серия: ;
 
-    public static void printMonthStatistic() {
-        Scanner scan = new Scanner(System.in);
+    public void printMonthStatistic() {
         try {
             System.out.println("Укажите номер месяца для вывода статистики по нему");
 
@@ -114,14 +114,14 @@ public class StepTracker {
             System.out.println("Среднее пройденное количество шагов за день: " + year.get(month).getAverageDaySteps());
             System.out.println("Пройденная дистанция в км: " + Converter.stepsToKm(sumMonthSteps));
             System.out.println("Количество сожженных килокалорий: " + Converter.stepsToKkal(sumMonthSteps));
-            System.out.println("Лучшая серия: " + year.get(month).getBestStreakSteps());
+            System.out.println("Лучшая серия: " + year.get(month).getBestStreakSteps(this));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
 
-    private static int readInt(Scanner s) {
+    private int readInt(Scanner s) {
         while (true) {
             String line = s.nextLine();
             try {
